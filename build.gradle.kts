@@ -21,9 +21,13 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.axonframework:axon-spring-boot-starter:4.11.2")
+	implementation("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	runtimeOnly("org.postgresql:postgresql")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

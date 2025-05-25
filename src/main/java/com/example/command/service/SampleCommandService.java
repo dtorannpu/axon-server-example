@@ -9,15 +9,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SampleService {
+public class SampleCommandService {
 
   private final CommandGateway commandGateway;
 
-  public SampleService(CommandGateway commandGateway) {
+  public SampleCommandService(CommandGateway commandGateway) {
     this.commandGateway = commandGateway;
   }
 
-  private static final Logger logger = LoggerFactory.getLogger(SampleService.class);
+  private static final Logger logger = LoggerFactory.getLogger(SampleCommandService.class);
 
   @CommandHandler
   public UUID request(String body) {
