@@ -23,6 +23,7 @@ public class SampleService {
   public UUID request(String body) {
     var id = UUID.randomUUID();
     var command = new SampleCommand(id, body);
+    logger.info("command send: {}", command);
     commandGateway.sendAndWait(command);
     return id;
   }
