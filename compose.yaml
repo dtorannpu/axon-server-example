@@ -1,1 +1,34 @@
 services:
+  axonserver-1:
+    image: axoniq/axonserver:2024.2.3
+    hostname: axonserver-1
+    volumes:
+      - axonserver-data1:/axonserver/data
+      - axonserver-events1:/axonserver/events
+      - axonserver-log1:/axonserver/log
+    secrets:
+      - source: axoniq-license
+        target: /axonserver/config/axoniq.license
+      - source: axonserver-properties
+        target: /axonserver/config/axonserver.properties
+    environment:
+      - AXONIQ_LICENSE=/axonserver/config/axoniq.license
+    ports:
+      - "8024:8024"
+      - "8124:8124"
+    networks:
+      - axon-demo
+
+volumes:
+  axonserver-data1:
+  axonserver-events1:
+  axonserver-log1:
+
+networks:
+  axon-demo:
+
+secrets:
+  axonserver-properties:
+    file: ./axonserver.properties
+  axoniq-license:
+    file: ./axoniq.license
