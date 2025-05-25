@@ -1,6 +1,6 @@
-package com.example.producer.command.service;
+package com.example.command.service;
 
-import com.example.producer.command.DocCreate;
+import com.example.command.dto.DocCreateCommand;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventhandling.gateway.EventGateway;
 import org.slf4j.Logger;
@@ -18,9 +18,9 @@ public class SampleService {
   private static final Logger logger = LoggerFactory.getLogger(SampleService.class);
 
   @CommandHandler
-  public void run(DocCreate command) {
+  public void run(DocCreateCommand command) {
     logger.info("command accepted: {}", command);
-    var event = new DocCreate(command.docId(), command.body());
+    var event = new DocCreateCommand(command.docId(), command.body());
     eventGateway.publish(event);
   }
 }

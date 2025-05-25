@@ -1,6 +1,6 @@
 package com.example.controller.sample;
 
-import com.example.producer.command.DocCreate;
+import com.example.command.dto.DocCreateCommand;
 import java.util.UUID;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ public class SampleController {
   @ResponseStatus(HttpStatus.CREATED)
   public PostResponse post(@RequestBody PostRequest req) {
     var id = UUID.randomUUID();
-    var command = new DocCreate(id, req.body());
+    var command = new DocCreateCommand(id, req.body());
     commandGateway.sendAndWait(command);
     return new PostResponse(id);
   }
