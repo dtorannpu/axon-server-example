@@ -1,7 +1,10 @@
 package com.example.command.service;
 
-import com.example.command.dto.DocCreateCommand;
+import com.example.command.dto.SampleCommand;
+import com.example.event.model.SampleEvent;
+import java.util.UUID;
 import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.gateway.EventGateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,18 +12,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SampleService {
-  private final EventGateway eventGateway;
 
-  public SampleService(EventGateway eventGateway) {
-    this.eventGateway = eventGateway;
+  private final CommandGateway commandGateway;
+
+  public SampleService(CommandGateway commandGateway) {
+    this.commandGateway = commandGateway;
   }
 
   private static final Logger logger = LoggerFactory.getLogger(SampleService.class);
 
   @CommandHandler
-  public void run(DocCreateCommand command) {
-    logger.info("command accepted: {}", command);
-    var event = new DocCreateCommand(command.docId(), command.body());
-    eventGateway.publish(event);
+  public UUID request(String body) {
+    var id = UUID.randomUUID();
+    var command = new SampleCommand(id, body);
+    commandGateway.sendAndWait(command);
+    return id;
   }
 }

@@ -1,6 +1,7 @@
 package com.example.controller.sample;
 
-import com.example.command.dto.DocCreateCommand;
+import com.example.command.dto.SampleCommand;
+import com.example.command.service.SampleService;
 import java.util.UUID;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.http.HttpStatus;
@@ -14,10 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/sample")
 public class SampleController {
-  private final CommandGateway commandGateway;
 
-  public SampleController(CommandGateway commandGateway) {
-    this.commandGateway = commandGateway;
+  private final SampleService sampleService;
+
+  public SampleController(SampleService sampleService) {
+    this.sampleService = sampleService;
   }
 
   @GetMapping
@@ -29,9 +31,7 @@ public class SampleController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public PostResponse post(@RequestBody PostRequest req) {
-    var id = UUID.randomUUID();
-    var command = new DocCreateCommand(id, req.body());
-    commandGateway.sendAndWait(command);
+    var id = sampleService.request(req.body());
     return new PostResponse(id);
   }
 }
