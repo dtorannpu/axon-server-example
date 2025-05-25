@@ -1,9 +1,6 @@
 package com.example.controller.sample;
 
-import com.example.command.dto.SampleCommand;
 import com.example.command.service.SampleService;
-import java.util.UUID;
-import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

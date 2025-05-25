@@ -1,11 +1,9 @@
 package com.example.command.service;
 
 import com.example.command.dto.SampleCommand;
-import com.example.event.model.SampleEvent;
 import java.util.UUID;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.axonframework.eventhandling.gateway.EventGateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
