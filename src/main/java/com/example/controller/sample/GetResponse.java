@@ -1,3 +1,3 @@
 package com.example.controller.sample;
 
-public record GetResponse(String body) {}
+public record GetResponse(Long id, String body) {}

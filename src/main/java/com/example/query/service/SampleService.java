@@ -3,6 +3,8 @@ package com.example.query.service;
 import com.example.event.model.SampleEvent;
 import com.example.infrastructure.entity.Sample;
 import com.example.infrastructure.repository.SampleRepository;
+import com.example.query.dto.SampleDTO;
+import com.example.query.request.SampleQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,5 +20,12 @@ public class SampleService {
     Sample sample = new Sample();
     sample.setBody(event.body());
     repository.save(sample);
+  }
+
+  public SampleDTO findById(SampleQuery query) {
+    return repository
+        .findById(query.id())
+        .map(s -> new SampleDTO(s.getId(), s.getBody()))
+        .orElse(null);
   }
 }
