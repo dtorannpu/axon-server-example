@@ -1,4 +1,4 @@
-package com.example.query.handler;
+package com.example.query.projection;
 
 import com.example.event.model.SampleEvent;
 import com.example.query.service.SampleService;
