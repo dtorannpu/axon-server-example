@@ -2,6 +2,7 @@ package com.example.controller.sample;
 
 import com.example.command.service.SampleCommandService;
 import com.example.query.service.SampleQueryService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,13 @@ public class SampleController {
 
   private final SampleCommandService sampleCommandService;
   private final SampleQueryService sampleQueryService;
+
+  @GetMapping
+  public List<GetResponse> list() {
+    return sampleQueryService.findAll().stream()
+        .map(s -> new GetResponse(s.id(), s.body()))
+        .toList();
+  }
 
   @GetMapping("{id}")
   public GetResponse get(@PathVariable Long id) {
