@@ -9,7 +9,7 @@ services:
       - "5432:5432"
 
   axonserver-1:
-    image: axoniq/axonserver:2024.2.3
+    image: axoniq/axonserver:2025.2.1
     hostname: axonserver-1
     volumes:
       - axonserver-data1:/axonserver/data
