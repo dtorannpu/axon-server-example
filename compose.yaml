@@ -1,5 +1,5 @@
 services:
-  postgres:
+  db:
     image: "postgres:latest"
     environment:
       POSTGRES_DB: mydatabase
@@ -8,36 +8,27 @@ services:
     ports:
       - "5432:5432"
 
-  axonserver-1:
+  axon-server:
     image: axoniq/axonserver:2025.2.1
-    hostname: axonserver-1
+    hostname: axon-server
     volumes:
-      - axonserver-data1:/axonserver/data
-      - axonserver-events1:/axonserver/events
-      - axonserver-log1:/axonserver/log
-    secrets:
-      - source: axoniq-license
-        target: /axonserver/config/axoniq.license
-      - source: axonserver-properties
-        target: /axonserver/config/axonserver.properties
+      - data:/axonserver/data
+      - events:/axonserver/events
     environment:
-      - AXONIQ_LICENSE=/axonserver/config/axoniq.license
+      AXONIQ_AXONSERVER_HOSTNAME: axon-server
+      AXONIQ_AXONSERVER_STANDALONE_DCB: true
+      AXONIQ_AXONSERVER_DEVMODE_ENABLED: true
     ports:
       - "8024:8024"
       - "8124:8124"
     networks:
       - axon-demo
 
-volumes:
-  axonserver-data1:
-  axonserver-events1:
-  axonserver-log1:
-
 networks:
   axon-demo:
 
-secrets:
-  axonserver-properties:
-    file: ./axonserver.properties
-  axoniq-license:
-    file: ./axoniq.license
+volumes:
+  data:
+    driver: local
+  events:
+    driver: local

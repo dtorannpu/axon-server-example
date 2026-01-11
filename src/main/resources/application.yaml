@@ -5,14 +5,10 @@ spring:
     database: postgresql
     hibernate:
       ddl-auto: update
-
 axon:
-  serializer:
-    general: jackson
-    events: jackson
-    messages: jackson
-
-logging:
-  level:
-    org.axonframework.messaging: DEBUG
-    org.axonframework.commandhandling: DEBUG
+  axonserver:
+    enabled: true
+#logging:
+#  level:
+#    org.axonframework.messaging: DEBUG
+#    org.axonframework.commandhandling: DEBUG

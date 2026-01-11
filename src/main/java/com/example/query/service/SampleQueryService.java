@@ -7,8 +7,7 @@ import com.example.query.request.SampleQuery;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import lombok.RequiredArgsConstructor;
-import org.axonframework.messaging.responsetypes.ResponseTypes;
-import org.axonframework.queryhandling.QueryGateway;
+import org.axonframework.messaging.queryhandling.gateway.QueryGateway;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -18,14 +17,14 @@ public class SampleQueryService {
   private final QueryGateway queryGateway;
 
   public Optional<SampleDTO> get(Long id) {
-    return queryGateway
-        .query(new SampleQuery(id), ResponseTypes.optionalInstanceOf(SampleDTO.class))
-        .join();
+    return Optional.ofNullable(queryGateway
+        .query(new SampleQuery(id), SampleDTO.class)
+        .join());
   }
 
-  public SampleListDTO findAll() throws ExecutionException, InterruptedException {
+  public SampleListDTO findAll() {
     return queryGateway
-        .query(new SampleFindAllQuery(), ResponseTypes.instanceOf(SampleListDTO.class))
-        .get();
+        .query(new SampleFindAllQuery(), SampleListDTO.class)
+        .join();
   }
 }
