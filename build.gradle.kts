@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.axonframework:axon-spring-boot-starter:4.12.2")
+    implementation("org.axonframework.extensions.spring:axon-spring-boot-starter:5.0.1")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.projectlombok:lombok")
     testImplementation("org.testcontainers:junit-jupiter")
