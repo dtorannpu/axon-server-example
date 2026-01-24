@@ -9,11 +9,12 @@ services:
       - "5432:5432"
 
   axon-server:
-    image: axoniq/axonserver:2025.2.1
+    image: axoniq/axonserver:2025.2.4
     hostname: axon-server
     volumes:
       - data:/axonserver/data
       - events:/axonserver/events
+      - logs:/axonserver/logs
     environment:
       AXONIQ_AXONSERVER_HOSTNAME: axon-server
       AXONIQ_AXONSERVER_STANDALONE_DCB: true
@@ -31,4 +32,6 @@ volumes:
   data:
     driver: local
   events:
+    driver: local
+  logs:
     driver: local
