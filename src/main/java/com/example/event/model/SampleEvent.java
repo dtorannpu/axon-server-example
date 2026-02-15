@@ -1,5 +1,14 @@
 package com.example.event.model;
 
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record SampleEvent(UUID docId, String body) {}
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class SampleEvent {
+  private UUID docId;
+  private String body;
+}

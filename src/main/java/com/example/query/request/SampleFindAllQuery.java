@@ -1,3 +1,6 @@
 package com.example.query.request;
 
-public record SampleFindAllQuery() {}
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+public class SampleFindAllQuery {}

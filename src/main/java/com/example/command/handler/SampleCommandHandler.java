@@ -5,8 +5,8 @@ import com.example.event.model.SampleEvent;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.axonframework.messaging.commandhandling.annotation.CommandHandler;
-import org.axonframework.messaging.eventhandling.gateway.EventGateway;
+import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.eventhandling.gateway.EventGateway;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -17,7 +17,7 @@ public class SampleCommandHandler {
 
   @CommandHandler
   public void run(SampleCommand command) {
-    var event = new SampleEvent(command.docId(), command.body());
+    var event = new SampleEvent(command.getDocId(), command.getBody());
     log.info("event created: {}", event);
     eventGateway.publish(List.of(event));
   }

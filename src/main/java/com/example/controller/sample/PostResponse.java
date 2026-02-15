@@ -1,5 +1,14 @@
 package com.example.controller.sample;
 
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record PostResponse(UUID id) {}
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class PostResponse {
+
+  private UUID id;
+}

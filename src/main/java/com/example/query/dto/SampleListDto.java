@@ -1,6 +1,6 @@
-package com.example.command.dto;
+package com.example.query.dto;
 
-import java.util.UUID;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SampleCommand {
-  private UUID docId;
-  private String body;
+public class SampleListDto {
+  private List<SampleDTO> samples;
 }

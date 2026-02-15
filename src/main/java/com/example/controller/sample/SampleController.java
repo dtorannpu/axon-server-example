@@ -3,7 +3,6 @@ package com.example.controller.sample;
 import com.example.command.service.SampleCommandService;
 import com.example.query.service.SampleQueryService;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +23,9 @@ public class SampleController {
   private final SampleQueryService sampleQueryService;
 
   @GetMapping
-  public List<GetResponse> list() throws ExecutionException, InterruptedException {
-    return sampleQueryService.findAll().samples().stream()
-        .map(s -> new GetResponse(s.id(), s.body()))
+  public List<GetResponse> list() {
+    return sampleQueryService.findAll().getSamples().stream()
+        .map(s -> new GetResponse(s.getId(), s.getBody()))
         .toList();
   }
 
@@ -34,14 +33,14 @@ public class SampleController {
   public GetResponse get(@PathVariable Long id) {
     return sampleQueryService
         .get(id)
-        .map(s -> new GetResponse(s.id(), s.body()))
+        .map(s -> new GetResponse(s.getId(), s.getBody()))
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
   }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public PostResponse post(@RequestBody PostRequest req) {
-    var id = sampleCommandService.request(req.body());
+    var id = sampleCommandService.request(req.getBody());
     return new PostResponse(id);
   }
 }

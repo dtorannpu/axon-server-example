@@ -2,12 +2,17 @@ spring:
   application:
     name: axon-server-example
   jpa:
-    database: postgresql
     hibernate:
       ddl-auto: update
+    open-in-view: false
 axon:
   axonserver:
     enabled: true
+  serializer:
+    general: jackson3
+    events: jackson3
+    messages: jackson3
+
 #logging:
 #  level:
 #    org.axonframework.messaging: DEBUG
