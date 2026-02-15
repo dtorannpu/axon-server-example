@@ -2,14 +2,14 @@ package com.example.query.projection;
 
 import com.example.event.model.SampleEvent;
 import com.example.query.dto.SampleDTO;
-import com.example.query.dto.SampleListDTO;
 import com.example.query.request.SampleFindAllQuery;
 import com.example.query.request.SampleQuery;
 import com.example.query.service.SampleService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.axonframework.messaging.eventhandling.annotation.EventHandler;
-import org.axonframework.messaging.queryhandling.annotation.QueryHandler;
+import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -31,7 +31,7 @@ public class SampleHandler {
   }
 
   @QueryHandler
-  public SampleListDTO handlerFindAll(SampleFindAllQuery query) {
-    return new SampleListDTO(sampleService.findAll());
+  public List<SampleDTO> handlerFindAll(SampleFindAllQuery query) {
+    return sampleService.findAll();
   }
 }

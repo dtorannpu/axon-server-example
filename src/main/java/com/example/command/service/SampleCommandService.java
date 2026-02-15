@@ -4,7 +4,7 @@ import com.example.command.dto.SampleCommand;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.axonframework.messaging.commandhandling.gateway.CommandGateway;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
 
 @Slf4j

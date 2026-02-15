@@ -8,6 +8,7 @@ spring:
 axon:
   axonserver:
     enabled: true
+
 #logging:
 #  level:
 #    org.axonframework.messaging: DEBUG
